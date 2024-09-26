@@ -11,6 +11,13 @@ It also includes a Python class (`Rectangle`) to demonstrate how custom classes 
 
 ## Project Setup
 
+### Clone the Repository
+To clone this repository, run the following command:
+
+```bash
+git clone https://github.com/Sandeep7784/Accuknox_Assignment.git
+```
+
 ### Install Dependencies
 
 First, activate your virtual environment (if you're using one) and install the dependencies:
