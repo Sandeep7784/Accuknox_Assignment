@@ -37,6 +37,11 @@ cd assignment
 python manage.py runserver
 ```
 
+## URL Endpoints
+
+- **`/test/`**: Triggers the `post_save` signal for `TestModel` to test Q1 and Q2 (synchronous execution and thread behavior).
+- **`/transaction-test/`**: Triggers the `post_save` signal for `TransactionTestModel` to test Q3 (transaction behavior).
+
 ## Answers to Questions
 
 ### Q1: Are Django signals executed synchronously or asynchronously?
@@ -50,7 +55,7 @@ Synchronous execution means that when a signal is sent, the program waits for al
 Execution time: 6.49 seconds
 ```
 
-**Conclusion:** The execution time indicates that the main thread waits for the signal to finish. If signals were asynchronous, the object creation would have completed almost instantly, while the signal would run in the background.
+**Conclusion:** The execution time indicates that the main thread waits for the signal to finish. If signals were asynchronous, the object creation would have completed almost instantly, while the signal would run in the background. It's important to note that while the output shows **6.49 seconds**, the exact execution time can vary but will generally be greater than **5 seconds** due to the synchronous nature of the signals.
 
 ### Q2: Do Django signals run in the same thread as the caller?
 
@@ -66,7 +71,7 @@ Signal completed for Test Object
 Signal running in thread: Thread-3 (process_request_thread)
 ```
 
-**Conclusion:** The identical thread names printed for both the view and the signal confirm they are executed in the same thread context.
+**Conclusion:** The identical thread names printed for both the view and the signal confirm they are executed in the same thread context. It's worth mentioning that while the thread name (e.g., **Thread-3**) can vary across different runs, the important aspect is that both the view and the signal share the same thread identifier.
 
 ### Q3: Do Django signals run in the same database transaction as the caller?
 
@@ -82,11 +87,6 @@ Error occurred. Object count: 0
 
 **Conclusion:** The output indicates that when the signal raises an exception, the object is not created, resulting in a count of zero. This confirms that the signal is part of the same transaction, as the failure of the signal prevents the creation of the object.
 
-
-### URL Endpoints
-
-- **`/test/`**: Triggers the `post_save` signal for `TestModel` to test Q1 and Q2 (synchronous execution and thread behavior).
-- **`/transaction-test/`**: Triggers the `post_save` signal for `TransactionTestModel` to test Q3 (transaction behavior).
 
 ## Python Custom Class: Rectangle
 
